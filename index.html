@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SurgiConnect UI</title>
+<style>
+body { font-family: Arial, sans-serif; background:#f3f5f7; padding:40px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px; }
+.card {
+  background:white; padding:24px; border-radius:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+.card h2 { margin-top:0; font-size:22px; font-weight:600; }
+.btn {
+  width:100%; padding:12px; border-radius:12px;
+  background:#3b7dff; color:white; border:none; font-size:16px;
+  cursor:pointer; margin-top:20px;
+}
+.section { background:#f1f4f8; padding:18px; border-radius:16px; margin-top:15px; }
+.row { margin:8px 0; height:12px; background:#e0e0e0; border-radius:6px; }
+.okko { display:flex; gap:15px; margin-top:10px; }
+.circle { width:45px; height:45px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; }
+.ok { background:#33c164; }
+.ko { background:#ff5757; }
+</style>
+</head>
+<body>
+<div class="grid">
+  <div class="card">
+    <h2>SurgiConnect</h2>
+    <div class="section">Patient</div>
+    <div class="section">Médecin</div>
+
+    <div class="section">
+      <strong>Diagnostic</strong><br><br>
+      Nom de l’acte<br>
+      Médecin associé<br>
+      Prix indicatif
+      <div class="okko">
+        <div class="circle ok">OK</div>
+        <div class="circle ko">KO</div>
+      </div>
+    </div>
+    <button class="btn">Demander un RDV</button>
+  </div>
+
+  <div class="card">
+    <h2>Patient</h2>
+    <div class="section">Importer un examen</div>
+    <div class="section">Entrer un code</div>
+    <div class="section">
+      Accès à l’examen
+      <div class="row"></div>
+      <div class="row"></div>
+    </div>
+    <button class="btn">Confirmer / Générer</button>
+  </div>
+
+  <div class="card">
+    <h2>Clinique</h2>
+    <div class="section">
+      Entrer code acte
+      <div class="section" style="background:#2c2c2c; color:white; margin-top:12px;">
+        Nom de l’acte médical<br>
+        Codification assurance<br>
+        Coût interne (confidentiel)<br><br>
+        <small>Visible médecin / clinique uniquement</small>
+      </div>
+      <div class="section" style="margin-top:12px;">Infos assurance</div>
+    </div>
+    <button class="btn">Confirmer / Générer</button>
+  </div>
+
+  <div class="card">
+    <h2>Résumé</h2>
+    <div class="section">
+      Diagnostic<br>
+      Acte<br>
+      Prix total<br>
+      Couverture assurance<br>
+      RDV confirmé le<br>
+      Clinique<br>
+      Médecin
+    </div>
+    <button class="btn">Télécharger le résumé PD</button>
+  </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SurgiConnect – Prototype Médecin</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #eef1f5;
+    padding: 40px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.card {
+    background: white;
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: 0.2s;
+    margin-bottom: 30px;
+}
+
+.card:hover {
+    transform: scale(1.01);
+}
+
+.card h2 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.section {
+    background: #f4f6f8;
+    padding: 16px;
+    border-radius: 14px;
+    margin-top: 14px;
+    cursor: pointer;
+}
+
+.subcontent {
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #e5e7ea;
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    background: #3b7dff;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+}
+</style>
+
+<script>
+function toggle(id) {
+    const block = document.getElementById(id);
+    block.style.display = block.style.display === "none" ? "block" : "none";
+}
+
+function generateCode() {
+    const code = Math.floor(100000 + Math.random() * 900000);
+    alert("Code généré : " + code);
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- --- RUBRIQUE MEDECIN --- -->
+    <div class="card">
+        <h2>Médecin</h2>
+
+        <div class="section" onclick="toggle('diag')">
+            Diagnostic
+        </div>
+        <div id="diag" class="subcontent hidden">
+            <p>- Résultat diagnostic<br>- Hypothèses médicales<br>- Notes internes</p>
+        </div>
+
+        <div class="section" onclick="toggle('exam')">
+            Examen à faire
+        </div>
+        <div id="exam" class="subcontent hidden">
+            <p>- IRM<br>- Scanner<br>- Bilan sanguin<br>- Examen complémentaire</p>
+        </div>
+
+        <div class="section" onclick="toggle('acte')">
+            Acte chirurgicale
+        </div>
+        <div id="acte" class="subcontent hidden">
+            <p>- Type d’acte<br>- Niveau d’urgence<br>- Notes pré-opératoires</p>
+        </div>
+
+        <div class="section" onclick="toggle('acces')">
+            Accès aux examens / analyses
+        </div>
+        <div id="acces" class="subcontent hidden">
+            <p>- Résultats PDF<br>- Imagerie<br>- Comptes rendus<br>- Documents partagés</p>
+        </div>
+
+        <div class="section" onclick="toggle('confirm')">
+            Confirmer / Générer un code
+        </div>
+        <div id="confirm" class="subcontent hidden">
+            <button onclick="generateCode()">Générer un code</button>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+
